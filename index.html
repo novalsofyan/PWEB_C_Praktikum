@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="body">
+    <div class="container-form">
+        <form id="formLog" name="masukLog">
+            <table>
+                <thead>
+                    <td colspan="2">Masuk</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th><label for="Email">ID Username</label></th>
+                        <td>
+                            : <input name='id' type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="password">Password</label></th>
+                        <td>
+                            : <input name='password' type="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2"><div class="modal gagal">invalid username or password</div></th>
+                    </tr>
+                    <tr>
+                        <th colspan="2" id=button><button type="submit" data-toggle="modal">submit</button></th>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <div class="modal sukses">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Sukses
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let formLogin = document.getElementById("formLog")
+        formLogin.addEventListener("click", function(event){
+            event.preventDefault()
+        });
+
+        let htmlBody = document.getElementById("body");
+        let button = document.querySelector('button[data-toggle="modal"]');
+        let modalSuccess =  document.querySelector('.sukses');
+        let modalInvalid =  document.querySelector('.gagal');
+
+        
+        button.addEventListener('click', function() {
+            let username = document.forms["formLog"]["id"].value;
+            let password = document.forms["formLog"]["password"].value;
+
+            if (username == "pweb_C" && password == "123123") {
+                modalSuccess.classList.add('show');
+                modalInvalid.classList.remove('show');
+                htmlBody.style.backgroundColor = "green";
+            } else {
+                modalInvalid.classList.add('show');
+                htmlBody.style.backgroundColor = "red";
+            }
+        });
+
+        modalSuccess.addEventListener('click', function() {
+            this.classList.remove('show');
+        });    
+    </script>
+
+</body>
+</html>
